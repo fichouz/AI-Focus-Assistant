@@ -1,1 +1,1 @@
-# AI-Wellbeing-Assistant
+# AI-Focus-Assistant
