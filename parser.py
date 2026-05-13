@@ -81,3 +81,36 @@ def parse_packet(raw_packet):
 
     return paketi
 
+def extract_packets(data):
+    packets = []
+    i = 0
+
+    while i < len(data) - 3:
+        if data[i] == 0xFF and data[i+1] == 0xFF:
+            j = i + 2
+            while j < len(data) - 1:
+                if data[j] == 0xFF and data[j+1] == 0xFF:
+                    break
+                j += 1
+
+            packets.append(data[i+2:j])
+            i = j
+        else:
+            i += 1
+
+    return packets
+
+
+def decode_file(filename):
+    with open(filename, "rb") as f:
+        data = f.read()
+
+    raw = extract_packets(data)
+
+    vsi = []
+    for p in raw:
+        parsed = parse_packet(p)
+        if parsed:
+            vsi.extend(parsed)
+
+    return vsi, raw
