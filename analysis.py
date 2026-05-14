@@ -48,7 +48,7 @@ def main():
     file_path = input("Enter the .bin file to analyze (e.g. 1.bin or C:/data/test.bin): ")
 
     try:
-        paketi = decode_file(file_path)
+        paketi, _  = decode_file(file_path)
     except Exception as e:
         print(f"Error while opening file: {e}")
         return
